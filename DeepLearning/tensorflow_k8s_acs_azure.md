@@ -10,7 +10,7 @@ deployments.
 
 Prequisites : Go and Git.
 
-Follow the [Installation guide on github.](https://github.com/Azure/acs-engine/blob/master/docs/acsengine.md)
+Follow the [Installation guide on github.](https://github.com/Azure/acs-engine/blob/wp-archive/docs/acsengine.md)
 
 ### Cluster definition
 
@@ -71,7 +71,7 @@ nvidia K80 GPU.
 More info on N-series features and availabilty on Azure Blog : <https://azure.microsoft.com/en-us/blog/azure-n-series-general-availability-on-december-1/>
 
 More info about the cluster definition using ACS engine :
-<https://github.com/Azure/acs-engine/blob/master/docs/clusterdefinition.md>
+<https://github.com/Azure/acs-engine/blob/wp-archive/docs/clusterdefinition.md>
 
 ### Deployment files generation
 

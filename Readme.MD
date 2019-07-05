@@ -121,30 +121,30 @@ git push
 
 * Se connecter sur le site le blog avec votre identifiant de domaine,
 
-![Connection](https://github.com/Cdiscount/IT-Blog/raw/master/images/readme/connect.png)
+![Connection](https://github.com/Cdiscount/IT-Blog/raw/wp-archive/images/readme/connect.png)
 
 * Ajouter un article via le menu d'administration en haut de Page,
 
-![Ajouter un article](https://github.com/Cdiscount/IT-Blog/raw/master/images/readme/addnew.png)
+![Ajouter un article](https://github.com/Cdiscount/IT-Blog/raw/wp-archive/images/readme/addnew.png)
 
 * Ajouter un titre à votre article et pensez à modifier le permalink pour faciliter le référencement.
 
-![Ajouter un titre](https://github.com/Cdiscount/IT-Blog/raw/master/images/readme/title.png)
+![Ajouter un titre](https://github.com/Cdiscount/IT-Blog/raw/wp-archive/images/readme/title.png)
 
 * Selectionner la/les catégorie(s) de l'article,
    * 1 catégorie est obligatoire pour avoir une image sur l'article.
 
-![Choix des catégories](https://github.com/Cdiscount/IT-Blog/raw/master/images/readme/cat.png)
+![Choix des catégories](https://github.com/Cdiscount/IT-Blog/raw/wp-archive/images/readme/cat.png)
 
 * Ajouter une image personalisée à l'article,
   * Par défaut l'image de la catégorie sera utilisée.
 
-![Image du post](https://github.com/Cdiscount/IT-Blog/raw/master/images/readme/selectimage.png)
+![Image du post](https://github.com/Cdiscount/IT-Blog/raw/wp-archive/images/readme/selectimage.png)
 
 * En bas de formulaire dans la zone "Markdown File Path" saisir le lien vers le fichier Markdown de l'article,
   * A chaque commit, sous GitHub l'article sera modifié sur le Blog (via une gestion d'ETAg).
 
-![Lien l'article à github](https://github.com/Cdiscount/IT-Blog/raw/master/images/readme/markdown_file_path.png)
+![Lien l'article à github](https://github.com/Cdiscount/IT-Blog/raw/wp-archive/images/readme/markdown_file_path.png)
 
 * Publier votre Article en mode Draft,
 * Faire relire votre article par un autre redacteur du blog,
