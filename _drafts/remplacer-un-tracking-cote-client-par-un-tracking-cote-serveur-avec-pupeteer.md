@@ -17,6 +17,7 @@ Ils permettent de suivre le nombre de visites, les pages les plus consultées, l
 Un tracker est un élément ajouté à une page HTML (eg. un script Javascript ou une image) et qui va être exécuté sur le navigateur du client pour transmettre des informations à un serveur distant où elles seront collectées et analysées.
 Les trackers ont des finalités différentes, certains trackers permettent d'améliorer la pertinence du contenu, de s'adapter aux usages des utlisateurs, d'améliorer le référencement, etc. C'est pourquoi il est fréquent d'avoir plusieurs trackers sur un même site.
 Le tracking s'accompagne souvent d'un cookie qui est installé sur le terminal client, afin de le suivre pendant sa navigation sur le site et éventuellement lors de ses prochaines visites.
+
 ![tracking client vs tracking serveur]({{ site.baseurl }}/assets/images/Architecture/tracking_server/tracking-client-serveur.png)
 
 ## Quels sont les avantages d'un tracking Back-End ?
