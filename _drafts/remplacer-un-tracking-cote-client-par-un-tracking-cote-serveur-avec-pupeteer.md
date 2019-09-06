@@ -15,7 +15,7 @@ Cependant ces trackers demandent des ressources aux terminaux des clients pour l
 Il existe de nombreux trackers, les plus connus sont le [pixel Facebook](https://fr-fr.facebook.com/business/) ou encore [Google Analytics](https://analytics.google.com/analytics/web/).
 Ils permettent de suivre le nombre de visites, les pages les plus consultées, les actions des utilisateurs ou encore les caractéristiques des utilisateurs (résolution, terminal et navigateur utilisé, système d'exploitation, etc.).
 Un tracker est un élément ajouté à une page HTML (eg. un script Javascript ou une image) et qui va être exécuté sur le navigateur du client pour transmettre des informations à un serveur distant où elles seront collectées et analysées.
-Les trackers ont des finalités différentes, on va trouver des trackers qui permettent d'améliorer la pertinence du contenu, de s'adapter aux usages des utlisateurs, d'améliorer le référencement, etc. C'est pourquoi il est fréquent d'avoir plusieurs trackers sur un même site.
+Les trackers ont des finalités différentes, certains trackers permettent d'améliorer la pertinence du contenu, de s'adapter aux usages des utlisateurs, d'améliorer le référencement, etc. C'est pourquoi il est fréquent d'avoir plusieurs trackers sur un même site.
 Le tracking s'accompagne souvent d'un cookie qui est installé sur le terminal client, afin de le suivre pendant sa navigation sur le site et éventuellement lors de ses prochaines visites.
 ![tracking client vs tracking serveur]({{ site.baseurl }}/assets/images/Architecture/tracking_server/tracking-client-serveur.png)
 
@@ -107,9 +107,9 @@ Afin de pouvoir de tenir le trafic présent sur le site nous avons donc du optim
 Nous avons vu comment déployer un tracking côté serveur.
 Ce type de tracking apporte son lot de difficultés et de limitations :
 
-- Les informations que l'on va envoyé au partenaire doivent être connues à l'avance afin de les récupérer auprès du client et de pouvoir les simuler dans nos navigateurs virtuels.
+- Les informations que l'on envoit aux partenaires doivent être connues à l'avance afin de les récupérer auprès du client et de pouvoir les simuler dans nos navigateurs virtuels.
 - Certains trackers ont des comportements particuliers (e.g une temporisation de quelques secondes ou attente d'un événement avant d'envoyer une requête) et peuvent donc dégrader nos performances.
-- La simulation de navigateurs necessite du temps CPU et également de la maintenance. Cela induit un coût plus important que le tracking côté client.
+- La simulation de navigateurs nécessite du temps CPU et également de la maintenance. Cela induit un coût plus important que le tracking côté client.
 
 Néanmoins le tracking Back-End permet de décharger l'utilisateur de l'exécution des scripts et donc de lui proposer une meilleure expérience de navigation.
 Il permet également de contrôler la cohérence et la qualité des données fournies aux trackers partenaires et donc la cohérence des analyses fournies par ces partenaires.
