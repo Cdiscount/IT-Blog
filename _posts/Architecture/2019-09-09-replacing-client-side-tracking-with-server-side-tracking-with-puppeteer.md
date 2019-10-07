@@ -42,7 +42,7 @@ There are two cases:
 - The tracking partner API is public and documented: in this case there is no particular difficulty. Just execute an HTTP request with the customer data.
 - The tracking partner API is not known: in this case we must run the tracker on our servers to mimic the behavior of users. This case is more complicated, and it is this one that will interest us here.
 
-![Schéma tracker]({{ site.baseurl }}/assets/images/Architecture/tracking_server/server_side_tracking.png)
+![Schéma tracker]({{ site.baseurl }}/assets/images/Architecture/tracking_server/server_side_tracking_en.png)
 
 To ensure server-side tracking when the partner tracking API is not known, you must:
 
