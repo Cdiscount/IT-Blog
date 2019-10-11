@@ -1,21 +1,11 @@
 ---
 layout: post
-title: 'Gagner en performances Part.1: 
-La Programmation réactive avec Spring'
-author: rd.team
+title: 'Gagner en performances Part.1: La Programmation réactive avec Spring'
+author: souen.mazouin
 categories: [fr]
-image: /assets/images/Architecture/gagner-en-perfs/spring.jpg
+image: assets/images/Architecture/gagner-en-perfs/spring.jpg
 ---
 
-<h1 align="center">
-    Gagner en performances Part.1:
-    <br>
-    La Programmation réactive avec Spring
-</h1>
-
-<p align= "center">
-    <img src="../../../assets/images/Architecture/gagner-en-perfs/spring.jpg" alt="frameworks bench logos" width="800"/>
-<p/>
 Si ce genre de considération ne se posait peut-être pas il y a quelques dizaines d’années, nos applications web modernes doivent aujourd’hui, de par leur dynamisme et leur interactivité accru, gérer de très nombreux types d’évènements afin d’enrichir toujours plus l’expérience utilisateur.
 Pour répondre au mieux à ces besoins, il nous faut déterminer quels outils seront les plus adaptés à cette tâche.
 Chez CDiscount, une partie de notre environnement technologique étant constitué en Java, nous avons donc décidé d’évaluer plusieurs solutions liées à ce langage au travers d'un benchmark.
@@ -53,9 +43,7 @@ Selon ce dernier un système réactif est :
 
 De façon pragmatique, disons qu’en programmation réactive, tout est flux de données asynchrones, ils sont partout !
 
-<p align= "center">
-    <img src="https://media1.tenor.com/images/ecd1452251b6d76865cfb7e1b6ebe701/tenor.gif?itemid=4867927" alt="meme everywhere" width="350"/>
-<p/>
+![](https://media1.tenor.com/images/ecd1452251b6d76865cfb7e1b6ebe701/tenor.gif?itemid=4867927)
 
 Il devient en effet concevable de créer des flux à partir de tout et n’importe quoi, absolument toute source de données est par essence un flux : les variables, les entrées utilisateurs, les collections, les propriétés, les caches, les structures de données, etc.
 En plus de ça il est également possible de combiner des flux, les transformer, les filtrer ou les agréger.
@@ -88,9 +76,7 @@ Ce benchmark se décompose en trois tests:
 
 Chaque test est exécuté pendant 15 secondes avec un pool de 512 connexions.
 
-  <p align= "center">
-      <img src="../../../assets/images/Architecture/gagner-en-perfs/histo_without_grpc.png" alt="Historigram of benchmark without gRPC" width="700"/>
-  <p/>
+![]({{ site.baseurl }}/assets/images/Architecture/gagner-en-perfs/histo_without_grpc.png)
 
 > _(Résultats exprimés en Req/Secondes)_
 
@@ -100,21 +86,17 @@ Seconde donnée intéressante, nous avons également consulté la consommation d
 
 -   Blocking Spring :
 
-     <p align= "center">
-        <img src="../../../assets/images/Architecture/gagner-en-perfs/threads_springMvc.png" alt="benchmark threads result spring-data" width="750"/>
-    <p/>
+![]({{ site.baseurl }}/assets/images/Architecture/gagner-en-perfs/threads_springMvc.png)
 
 -   Reactive Spring:
 
-     <p align= "center">
-        <img src="../../../assets/images/Architecture/gagner-en-perfs/threads_reactiveSpring.png" alt="benchmark threads result reactive spring-data" width="750"/>
-    <p/>
+![]({{ site.baseurl }}/assets/images/Architecture/gagner-en-perfs/threads_reactiveSpring.png)
 
 La version bloquante du framework ouvre donc comme attendu un thread dédié par client. L'approche reactive utilise quand à elle un nombre fini de threads pour la même quantité de clients. Chaque thread nécessitant par défaut 1 Mo de RAM, le gain en matière de consommation de ressources n'est donc pas négligeable.
 
 ## Conclusion
 
-> Pour les curieux et ceux qui voudraient faire leurs propres tests, le projet est dispo avec un quick-start sur [**Github**](https://github.com/SouenMazouin/framework-benchmarks).
+<!-- > Pour les curieux et ceux qui voudraient faire leurs propres tests, le projet est dispo avec un quick-start sur [**Github**](https://github.com/SouenMazouin/framework-benchmarks). -->
 
 « Le logiciel ralenti plus vite que le matériel n’accélère » disait Niklaus Wirth en 1995, le problème n'est pas nouveau, et les solutions existantes telles que le modèle réactif non plus, ce qui change, en revanche, c'est l'explosion du nombre d'applications candidates à ce type de modèle.
 Néanmoins, si ces systèmes réactifs permettent effectivement une interaction accrue et donc une grande satisfaction de l'utilisateur, il convient de remarquer qu'il est tout de même nécessaire d'appréhender un nouveau paradigme ainsi qu'un nouveau niveau d'abstraction avant que cela ne devienne naturel. À noter également que le modèle réactif n'est pas une fin en soi et que d'autres pistes permettant de réduire l'impact des threads, telles que les [coroutines et les fibers](https://medium.com/software-development-2/coroutines-and-fibers-why-and-when-5798f08464fd), sont actuellement en cours d'élaboration pour Java.
