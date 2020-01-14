@@ -70,17 +70,23 @@ Simple, légere, réactive, et surtout non bloquante, cette solution nous permet
 
 Ce benchmark se décompose en trois tests:
 
--   Un premier retournant simplement une string par requête HTTP
--   Un second effectuant une seule query sur la base donnée pour chaque requête HTTP
--   Un troisième effectuant vingt queries vers la base de donnée pour chaque requête HTTP
+-   Un premier retournant simplement une string par requête HTTP, sans aller consulter la base de donnée donc.
+-   Un second effectuant une seule query sur la base donnée pour chaque requête HTTP.
+-   Un troisième effectuant vingt queries vers la base de donnée pour chaque requête HTTP.
 
-Chaque test est exécuté pendant 15 secondes avec un pool de 512 connexions.
+Chaque test est exécuté pendant 300 secondes, avec une allocation de 8 threads et un pool de 512 connexions.
 
-![]({{ site.baseurl }}/assets/images/Architecture/gagner-en-perfs/histo_without_grpc.png)
+##### Augmentation du nombre de requêtes/seconde
 
-> _(Résultats exprimés en Req/Secondes)_
+Le premier point que nous avons été amenés à vérifier a été la différence de req/sec entre les deux implémentations :
 
-Comme on peut le constater, l'approche réactive de Spring performe immédiatement sur toute la série de tests.
+![]({{ site.baseurl }}/assets/images/Architecture/gagner-en-perfs/req-sec.png)
+
+> Résultats exprimés en Req/Sec
+
+Comme on peut le constater, l'approche réactive de Spring performe immédiatement sur toute la série de tests, nous permettant d'augmenter considérablement le nombre de requêtes par seconde.
+
+##### Diminution de la consommation de threads
 
 Seconde donnée intéressante, nous avons également consulté la consommation de threads par le logiciel :
 
@@ -94,9 +100,18 @@ Seconde donnée intéressante, nous avons également consulté la consommation d
 
 La version bloquante du framework ouvre donc comme attendu un thread dédié par client. L'approche reactive utilise quand à elle un nombre fini de threads pour la même quantité de clients. Chaque thread nécessitant par défaut 1 Mo de RAM, le gain en matière de consommation de ressources n'est donc pas négligeable.
 
-## Conclusion
+##### Diminution de la latence
 
-<!-- > Pour les curieux et ceux qui voudraient faire leurs propres tests, le projet est dispo avec un quick-start sur [**Github**](https://github.com/SouenMazouin/framework-benchmarks). -->
+Dernier constat, et pas des moindre, l'impact sur la latence :
+
+![]({{ site.baseurl }}/assets/images/Architecture/gagner-en-perfs/latency.png)
+
+> Résultats exprimés en ms
+
+Encore une fois l'implémentation reactive de Spring viens nous faire gagner de précieuses millisecondes.
+Quand on connaît l'impact qu'une latence trop importante peut avoir, en bout de chaîne, sur les aspects business, il s'agit là encore d'un constat fort appréciable.
+
+## Conclusion
 
 « Le logiciel ralenti plus vite que le matériel n’accélère » disait Niklaus Wirth en 1995, le problème n'est pas nouveau, et les solutions existantes telles que le modèle réactif non plus, ce qui change, en revanche, c'est l'explosion du nombre d'applications candidates à ce type de modèle.
 Néanmoins, si ces systèmes réactifs permettent effectivement une interaction accrue et donc une grande satisfaction de l'utilisateur, il convient de remarquer qu'il est tout de même nécessaire d'appréhender un nouveau paradigme ainsi qu'un nouveau niveau d'abstraction avant que cela ne devienne naturel. À noter également que le modèle réactif n'est pas une fin en soi et que d'autres pistes permettant de réduire l'impact des threads, telles que les [coroutines et les fibers](https://medium.com/software-development-2/coroutines-and-fibers-why-and-when-5798f08464fd), sont actuellement en cours d'élaboration pour Java.
