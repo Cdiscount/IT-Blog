@@ -64,7 +64,7 @@ The Kafka admin API has a [listConsumerGroupOffsets](https://kafka.apache.org/24
 
 ### Computing the number of messages that must be read before reaching a message
 
-Once we know on which partition a message is stored, we can compute the the number of messages as the difference between the partition offset at the time the message was published and the current consumer offset for the partition.
+Once we know on which partition a message is stored, we can compute the number of messages as the difference between the partition offset at the time the message was published and the current consumer offset for the partition.
 
 ## Estimating the speed of consumption of a consumer
 
