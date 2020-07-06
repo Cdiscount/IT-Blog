@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Pourquoi l’engineering ?"
-author: Yvan Saule
+author: yvan.saule
 categories: [fr, engineering, change, mindset, acceleration, digital transformation]
 image: assets/images/misc/office.jpeg
 excerpt_separator: <!--end of excerpt-->
