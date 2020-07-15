@@ -6,16 +6,16 @@ categories: [fr]
 image: assets/images/Architecture/reactive-programming/spring.jpg
 ---
 
-Si ce genre de considération ne se posait peut-être pas il y a quelques dizaines d’années, nos applications web modernes doivent aujourd’hui, de par leur dynamisme et leur interactivité accru, gérer de très nombreux types d’évènements afin d’enrichir toujours plus l’expérience utilisateur.
+Si ce genre de considération ne se posait peut-être pas il y a quelques dizaines d’années, nos applications web modernes doivent aujourd’hui, de par leur dynamisme et leur interactivité accrus, gérer de très nombreux types d’évènements afin d’enrichir toujours plus l’expérience utilisateur.
 Pour répondre au mieux à ces besoins, il nous faut déterminer quels outils seront les plus adaptés à cette tâche.
 Chez CDiscount, une partie de notre environnement technologique étant constitué en Java, nous avons donc décidé d’évaluer plusieurs solutions liées à ce langage au travers d'un benchmark.
 
-La première de ces solutions est une fonctionnalité majeure portée par Pivotal à leur framework Spring dans sa version 5 : [Spring-Webflux](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html).
+La première de ces solutions est une fonctionnalité majeure portée par Pivotal à leur framework Spring dans sa version 5 : [Reactive-Spring](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html).
 
-Un des éléments cruciaux apporté par Webflux est l’important changement de paradigme vis-à-vis de Spring-MVC au travers des [Reactive Streams](https://www.reactive-streams.org/).
-En effet, la [version initiale de Spring](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc) est traditionnellement construite sur l’API Servlet, utilisant une architecture I/O à blocage synchrone avec un modèle à 1 req/thread,
+Un des éléments cruciaux apporté par Reactive-Spring est le changement de paradigme au travers des [Reactive Streams](https://www.reactive-streams.org/).
+En effet, la [version initiale de Spring](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc) est traditionnellement construite sur l’API Servlet, utilisant une architecture I/O bloquante synchrone avec un modèle un thread par requête.
 
-Webflux a opté, de son côté, pour une approche réactive, non bloquante, asynchrone, capable de gérer le phénomène de [back-pressure](https://blog.octo.com/les-strategies-de-gestion-de-pression-partie-i/) ainsi qu’un nombre important de connexions concurrentes.
+Reactive-Spring a opté, de son côté, pour une approche réactive, non bloquante, asynchrone, capable de gérer le phénomène de [contre-pression](https://blog.octo.com/les-strategies-de-gestion-de-pression-partie-i/) ainsi qu’un nombre important de connexions concurrentes utilisant un nombre de threads restreint.
 
 ### Qu'est ce que la programmation réactive ?
 
@@ -50,12 +50,12 @@ En plus de ça il est également possible de combiner des flux, les transformer,
 
 ### D'accord, mais comment gérer le cas JDBC ?
 
-L'accès aux données en Java, dans le cas d'une BDD relationnelle, se fait traditionnellement via JDBC _[(Java DataBase Connectivity)](https://fr.wikipedia.org/wiki/Java_Database_Connectivity)_. Le souci, dans le cadre du modèle réactif, est que JDBC est par nature bloquant. L'ensemble de notre démarche n'aurait donc plus beaucoup de sens si nous insérions ce genre de point de contention dans notre architecture.
+L'accès aux données en Java, dans le cas d'une base de données relationnelle, se fait traditionnellement via JDBC _[(Java DataBase Connectivity)](https://fr.wikipedia.org/wiki/Java_Database_Connectivity)_. Le souci, dans le cadre du modèle réactif, est que JDBC est par nature bloquant. L'ensemble de notre démarche n'aurait donc plus beaucoup de sens si nous insérions ce genre de point de contention dans notre architecture.
 C'est ici qu'intervient [PgClient](https://www.julienviet.com/reactive-pg-client/guide/java/),
 comme son nom l'indique, il s'agit d'un client PostgreSQL.
-Simple, légere, réactive, et surtout non bloquante, cette solution nous permet donc de gérer plusieurs connexions par thread vers notre base de données là ou JDBC vient ouvrir 1 thread par connexion.
+Simple, légere, réactive, et surtout non bloquante, cette solution nous permet donc de gérer plusieurs connexions par thread vers notre base de données là ou JDBC vient ouvrir un thread par connexion.
 
-> Parenthèse sur une autre technologie présente sur le marché, [R2DBC](https://r2dbc.io/) semble prometteur mais n'a pas été retenu pour notre benchmark car celui-ci en est encore au stade experimental.
+> Une autre technologie, [R2DBC](https://r2dbc.io/) permet d'accéder à une base de données de façon réactive mais au moment de notre benchmark, celle-ci n'en était qu'au stade expérimental.
 
 ## Benchmark
 
@@ -70,19 +70,19 @@ Simple, légere, réactive, et surtout non bloquante, cette solution nous permet
 
 Ce benchmark se décompose en trois tests:
 
--   Un premier retournant simplement une string par requête HTTP, sans aller consulter la base de donnée donc.
--   Un second effectuant une seule query sur la base donnée pour chaque requête HTTP.
--   Un troisième effectuant vingt queries vers la base de donnée pour chaque requête HTTP.
+-   Un premier retournant simplement une chaîne de caractères par requête HTTP, sans aller consulter la base de donnée.
+-   Un second effectuant une seule lecture sur la base donnée pour chaque requête HTTP.
+-   Un troisième effectuant vingt lectures sur la base de donnée pour chaque requête HTTP.
 
 Chaque test est exécuté pendant 300 secondes, avec une allocation de 8 threads et un pool de 512 connexions.
 
 ##### Augmentation du nombre de requêtes/seconde
 
-Le premier point que nous avons été amenés à vérifier a été la différence de req/sec entre les deux implémentations :
+Le premier point que nous avons été amenés à vérifier a été la différence de débit (req/sec) entre les deux implémentations :
 
 ![]({{ site.baseurl }}/assets/images/Architecture/reactive-programming/req-sec.png)
 
-> Résultats exprimés en Req/Sec
+> Résultats exprimés en requêtes/secondes
 
 Comme on peut le constater, l'approche réactive de Spring performe immédiatement sur toute la série de tests, nous permettant d'augmenter considérablement le nombre de requêtes par seconde.
 
@@ -90,11 +90,11 @@ Comme on peut le constater, l'approche réactive de Spring performe immédiateme
 
 Seconde donnée intéressante, nous avons également consulté la consommation de threads par le logiciel :
 
--   Blocking Spring :
+-   Spring classique:
 
 ![]({{ site.baseurl }}/assets/images/Architecture/reactive-programming/threads_springMvc.png)
 
--   Reactive Spring:
+-   Reactive-Spring:
 
 ![]({{ site.baseurl }}/assets/images/Architecture/reactive-programming/threads_reactiveSpring.png)
 
@@ -102,14 +102,14 @@ La version bloquante du framework ouvre donc comme attendu un thread dédié par
 
 ##### Diminution de la latence
 
-Dernier constat, et pas des moindre, l'impact sur la latence :
+Dernier constat, et pas des moindres, l'impact sur la latence:
 
 ![]({{ site.baseurl }}/assets/images/Architecture/reactive-programming/latency.png)
 
 > Résultats exprimés en ms
 
 Encore une fois l'implémentation reactive de Spring viens nous faire gagner de précieuses millisecondes.
-Quand on connaît l'impact qu'une latence trop importante peut avoir, en bout de chaîne, sur les aspects business, il s'agit là encore d'un constat fort appréciable.
+Quand on connaît l'impact qu'une latence trop importante peut avoir, en bout de chaîne, sur les aspects métiers, il s'agit là encore d'un constat fort appréciable.
 
 ## Conclusion
 
