@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'Gagner en performances avec la programmation reactive'
+title: 'Préservez vos ressources et boostez la performance avec la programmation réactive'
 author: souen.mazouin
 categories: [fr]
 image: assets/images/Architecture/reactive-programming/spring.jpg
