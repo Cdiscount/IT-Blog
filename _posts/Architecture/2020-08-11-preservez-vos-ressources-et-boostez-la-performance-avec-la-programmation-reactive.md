@@ -2,8 +2,8 @@
 layout: post
 title: 'Préservez vos ressources et boostez la performance avec la programmation réactive'
 author: souen.mazouin
-categories: [fr]
-image: assets/images/Architecture/reactive-programming/spring.jpg
+categories: [fr, programmation]
+image: assets/images/Architecture/reactive-programming/reactive.png
 ---
 
 Si ce genre de considération ne se posait peut-être pas il y a quelques dizaines d’années, nos applications web modernes doivent aujourd’hui, de par leur dynamisme et leur interactivité accrus, gérer de très nombreux types d’évènements afin d’enrichir toujours plus l’expérience utilisateur.
